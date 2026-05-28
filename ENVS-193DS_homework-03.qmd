@@ -1,0 +1,45 @@
+---
+title: "ENVS 193DS Homework #3"
+author: "Ella Menin"
+format: pdf
+---
+
+# Setting up
+
+```{r}
+#| label: reading-in-packages
+#| message: false
+#| warning: false
+
+# reading in package: tidyverse
+library(tidyverse)
+# reading in package: here
+library(here)
+# reading in package: janitor
+library(janitor)
+# reading in package: readxl
+library(readxl)
+
+```
+
+```{r}
+#| label: reading-in-kelp-data
+
+# storing read kelp data as "kelp" object
+kelp <- read.csv("data/temp-kelp.csv")
+
+```
+
+```{r}
+#| label: reading-in-personal-data
+
+# storing read personal data as "personal_data" object
+personal_data <- read.csv("data/personal data(Sheet1).csv")
+
+```
+
+# Problem 1
+
+## a.
+
+The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are a Pearson correlation and and a linear model. A Pearson correlation evaluates the strength and direction of the linear relationship between two variables; in this case, ocean temperature and giant kept frond elongation rate. A linear model also evaluates the relationship between two variables, but it specifically shows elongation rate as a response variable that is predicted by temperature. Creating a linear model for this data can show how much growth changes per 1 degree Celsius increase in temperature.
