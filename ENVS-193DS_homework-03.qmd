@@ -99,7 +99,7 @@ ggplot(data = kelp_preds,
     # x axis: ocean temperature
     x = "Ocean Temperature (°C)",
     # y axis: giant kelp frond elongation rate
-    y = "Giant Kelp Frond Elongation Rate (cm day$^{-1}$)",
+    y = expression("Giant Kelp Frond Elongation Rate (" * cm ~ day^{-1} * ")"),
     # visualization title: finding from visualization
     title = "As ocean temperature decreases, so does elongation rate"
   ) +
@@ -170,3 +170,94 @@ cor.test(
 The Pearson correlation test and the simple linear regression produced the same overall conclusion: to reject the null hypothesis in favor of accepting the alternative hypothesis, as both tests found a statistically significant negative relationship between ocean temperature and giant kelp frond elongation rate.
 
 The Pearson correlation measured the strength and direction of the relationship between temperature and kelp elongation rate (r = −0.688), while the linear regression estimated the amount of change in kelp growth associated with temperature (kelp elongation rate decreased by approximately 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature). 
+
+# Problem 2
+
+## a.
+
+```{r}
+#| label: cleaning-data-figure-1
+
+# creating a new object specifically for my cleaned data
+my_data_clean <- personal_data |>
+# cleaning up the names to include lowercase letters and underscores
+janitor::clean_names() |>
+# mutating temperature variable
+mutate(temperature_h_w_c = factor(temperature_h_w_c,
+                                  levels = c("H", "W", "C"), # order in which levels will appear on plot 
+                                  labels = c("Hot", "Warm", "Cold"))) # full words for plot labels
+```
+
+```{r}
+#| label: coding-figure-1
+
+# base layer ggplot with my_data_clean data frame
+ggplot(data = my_data_clean,
+       # setting x and y axes
+       mapping = aes(x = temperature_h_w_c, # x axis temperature
+                     y = water_intake_l, # y axis water intake in liters
+                     color = temperature_h_w_c)) + # color by temperature
+  # first layer geom_boxplot to assess median amounts of water drank
+  geom_boxplot() +
+  # setting nice colors for my temperature values (intuitive ones)
+  scale_color_manual(values = c("Cold" = "skyblue", # blue for cold
+                                "Warm" = "palevioletred", # this color is just warm to me idk
+                                "Hot" = "red3")) + # red for hot, duh
+  # renaming axes to be neater and more clear
+  labs(
+    x = "Temperature: hot, warm, or cold", # x axis looking at temperature
+    y = "Water intake (L)", # y axis looking at water intake
+    # title that says something about the figure
+    title = "On average, I drink more water when it is hot outside",
+    # subtitle stating when the most recent data collection was
+    subtitle = "Most recent data collected 5/25/2026"
+  ) +
+  # my favorite theme
+  theme_bw() +
+  # removing the legend, not super necessary here
+  theme(legend.position = "none",
+        # removing grid panels
+        panel.grid = element_blank())
+```
+
+```{r}
+#| label: cleaning-data-figure-2
+
+# making new object specifically for this part, as i do not want to mess with my other cleaned data object in case i want to re-run
+my_data_steps <- personal_data |> 
+  # cleaning names to be lowercase and include underscores
+  janitor::clean_names() |> 
+  # dropping n/a values for duration of shift to filter for only days i worked
+  drop_na(duration_of_shift_hrs)
+
+```
+
+```{r}
+#| label: coding-figure-2
+
+# base layer ggplot with my_data_steps data frame
+ggplot(data = my_data_steps,
+       # setting x and y axes
+       mapping = aes(x = duration_of_shift_hrs, # x axis is duration of shift
+                     y = water_intake_l)) + # y axis is water intake
+  # first layer geom_point in pretty royal blue color
+  geom_point(color = "royalblue2") +
+  # setting axes, title, and subtitles
+  labs(
+    # x axis title duration of shift
+    x = "Duration of shift (hours)",
+    # y axis title water intake
+    y = "Water intake (L) for entire day",
+    # bland statement for title because this relationship is kind of a stretch
+    title = "Loose relationship between duration \nof shift and daily water intake",
+    # subtitle most recent data collected on may 25
+    subtitle = "Most recent data collected 5/25/2026"
+  ) +
+  # voted best theme on a reddit post i read
+  theme_bw() +
+  # getting rid of panel grid
+  theme(panel.grid = element_blank())
+
+
+```
+
