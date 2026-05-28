@@ -42,7 +42,7 @@ personal_data <- read.csv("data/personal data(Sheet1).csv")
 
 ## a.
 
-The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are a Pearson correlation and and a linear model. A Pearson correlation evaluates the strength and direction of the linear relationship between two variables; in this case, ocean temperature and giant kept frond elongation rate. A linear model also evaluates the relationship between two variables, but it specifically shows elongation rate as a response variable that is predicted by temperature. Creating a linear model for this data can show how much growth changes per 1 degree Celsius increase in temperature.
+The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are a Pearson correlation and and a simple linear regression. A Pearson correlation evaluates the strength and direction of the linear relationship between two variables; in this case, ocean temperature and giant kept frond elongation rate. A simple linear regression also evaluates the relationship between two variables, but it specifically shows elongation rate as a response variable that is predicted by temperature. Creating a linear model for this data can show how much growth changes per 1 degree Celsius increase in temperature.
 
 ## b.
 
@@ -99,7 +99,7 @@ ggplot(data = kelp_preds,
     # x axis: ocean temperature
     x = "Ocean Temperature (°C)",
     # y axis: giant kelp frond elongation rate
-    y = "Giant Kelp Frond Elongation Rate (cm day⁻¹)",
+    y = "Giant Kelp Frond Elongation Rate (cm day$^{-1}$)",
     # visualization title: finding from visualization
     title = "As ocean temperature decreases, so does elongation rate"
   ) +
@@ -139,5 +139,11 @@ plot(kelp_lm)
 Here, I checked the assumptions of the linearity of data, the normality of residuals, homoscedasticity (constant variance), and if there are outliers significant enough to influence our plot.
 
 The residuals vs fitted and scale-location plots featured points that are somewhat evenly and randomly distributed around the horizontal dotted line, indicating homoscedasticity. The Q-Q residuals plot suggests normally enough distributed residuals. Finally, the residuals vs leverage plot does not reveal any outliers significant enough to heavily influence the model, as all points fall within the indicator lines (indicator lines are not able to be seen, suggesting that points fall within them). All of these factors indicate that a linear model is appropriate for this data. 
+
+## d.
+
+To evaluate the relationship between ocean temperature and giant kelp frond elongation rate, a simple linear regression was used to test whether temperature could predict kelp growth.
+
+A strong negative relationship was found between ocean temperature and giant kelp frond elongation rate, meaning kelp grew more slowly at higher temperatures (linear regression, F(1, 30) = 26.93, R² = 0.473, p < 0.001, $\alpha$ = 0.05). On average, kelp elongation rate decreased by about 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature.
 
 
