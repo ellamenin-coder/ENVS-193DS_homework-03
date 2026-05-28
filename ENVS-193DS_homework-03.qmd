@@ -38,7 +38,7 @@ personal_data <- read.csv("data/personal data(Sheet1).csv")
 
 ```
 
-# Problem 1
+# Problem 1: Giant kelp fronds
 
 ## a.
 
@@ -171,7 +171,7 @@ The Pearson correlation test and the simple linear regression produced the same 
 
 The Pearson correlation measured the strength and direction of the relationship between temperature and kelp elongation rate (r = −0.688), while the linear regression estimated the amount of change in kelp growth associated with temperature (kelp elongation rate decreased by approximately 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature). 
 
-# Problem 2
+# Problem 2: Personal data
 
 ## a.
 
@@ -270,3 +270,10 @@ On average, my median daily water intake (measured in liters) is higher when I e
 **Figure 2:** Relationship between duration of shift (hrs) and daily water intake (L)
 
 There is not a strong correlation between the duration of the shift worked that day (measured in hours) and daily water intake (measured in liters). Based on the orientation of the blue points, which represent individual, daily observations, there may be a positive relationship between these two variables, but a large amount of outliers make it difficult to discern a concrete relationship.
+
+# Problem 3: Affective visualization
+
+## a.
+
+For my affective visualization, I want to utilize the fact that I am recording a ton of variables every day, including whether or not I went to school, work, if I had a sinus infection, and much more. Consequently, for my affective visualization, I would like to use my water consumption for a day to tell a story about my entire day, like a "day-in-my-life" premise. I want it to have character and reflect my personal artistic style because it is *about me.* I am thinking of drawing my Owala water bottle as the main component and visually show my water consumption, then surround this with different variable explanations about what I did that day that could have contributed to my water consumption.
+
