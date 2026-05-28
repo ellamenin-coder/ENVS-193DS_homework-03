@@ -305,3 +305,11 @@ link here
 
 For my statistical critique, I am examining a paper entitled, “Behavioural dynamics of water quality parameters and human exposure assessment of trace metals in Agulu Lake Water, South-East Nigeria” from the ScienceDirect journal. In this paper, they include a Spearman correlation, as they are focusing on examining relationships between pairs of variables. In
 this scenario, the response variable could be one water quality parameter (like concentration of a specific trace metal) and the predictor variable could be another water quality parameter (like another trace metal).
+
+```{r}
+#| label: inserting-spearman-correlation-figure
+
+# code to include png of the spearman correlation figure from paper
+knitr::include_graphics("data/spearman_screenshot copy.png")
+```
+
