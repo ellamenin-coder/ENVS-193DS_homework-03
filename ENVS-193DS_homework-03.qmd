@@ -294,3 +294,14 @@ For my affective visualization, I want to utilize the fact that I am recording a
 * I decided to do a digital drawing because I felt as though hand-drawing my icons the way that I experience and "feel" my variables would be the most authentic. For example, my hand-drawn sad "sinus infection" face is exactly how I feel when I have a sinus infection.
 
 * I created my work by first thinking about what I wanted to accomplish, which was telling a story about my day and mood through my work. So, I started with a time-line to outline my day and what my thoughts were about water. I added my variables as well, and then included lots of little icons that I associate with those variables.
+
+## e.
+
+link here
+
+# Problem 4: Statistical critique
+
+## a.
+
+For my statistical critique, I am examining a paper entitled, “Behavioural dynamics of water quality parameters and human exposure assessment of trace metals in Agulu Lake Water, South-East Nigeria” from the ScienceDirect journal. In this paper, they include a Spearman correlation, as they are focusing on examining relationships between pairs of variables. In
+this scenario, the response variable could be one water quality parameter (like concentration of a specific trace metal) and the predictor variable could be another water quality parameter (like another trace metal).
