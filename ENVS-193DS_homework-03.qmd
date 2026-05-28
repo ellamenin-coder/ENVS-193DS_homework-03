@@ -322,3 +322,8 @@ knitr::include_graphics("data/spearman_screenshot copy.png")
 ## b.
 
 I do think that the authors clearly represented their statistics in figures. Because they had so many trace metals (and relationships between these trace metals) to analyze, I believe this figure is an efficient way to visually demonstrate the correlation between two trace metals. This figure does not show explicit values per circle (Spearman correlation values), but the relative size of the circle compared to other sizes makes it easy to tell whether or not the presence of two trace metals are heavily related. The addition of the scale on the side also makes it very clear.
+
+## c.
+
+This figure is mostly ink, as they data is represented by purposefully sized dots. Given how many relationships between trace metals this figure is exploring, I feel as though they have excellent aesthetic clarity with minimal visual clutter. This figure shows 72 (half the figure is filled because the other half would be repetitive) relationships, so I commend them on their creative figure creation to convey so much data in one figure. 
+
