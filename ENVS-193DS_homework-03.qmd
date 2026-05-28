@@ -303,7 +303,7 @@ knitr::include_graphics("stats_affective_visualization.png")
 
 ## e.
 
-link here
+[Click here](https://docs.google.com/presentation/d/1zhQwAGbYkwbz2qa-X33W2PWXj3Q-ATORd7sfZFf4XUw/edit?usp=sharing) to view slideshow presentation 
 
 # Problem 4: Statistical critique
 
