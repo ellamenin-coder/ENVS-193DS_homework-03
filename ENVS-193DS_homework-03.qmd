@@ -182,7 +182,8 @@ The Pearson correlation measured the strength and direction of the relationship 
 my_data_clean <- personal_data |>
 # cleaning up the names to include lowercase letters and underscores
 janitor::clean_names() |>
-# mutating temperature variable
+filter(!is.na(temperature_h_w_c),
+         temperature_h_w_c != "") |>
 mutate(temperature_h_w_c = factor(temperature_h_w_c,
                                   levels = c("H", "W", "C"), # order in which levels will appear on plot 
                                   labels = c("Hot", "Warm", "Cold"))) # full words for plot labels
@@ -258,6 +259,14 @@ ggplot(data = my_data_steps,
   # getting rid of panel grid
   theme(panel.grid = element_blank())
 
-
 ```
 
+## b.
+
+**Figure 1:** Relationship between daily water intake (L) and daily temperature (hot, warm, cold)
+
+On average, my median daily water intake (measured in liters) is higher when I experience warmer temperatures that day, as shown by the median bar for the data in red (hot) being higher than the median bar for the data in pink (warm) and the median bar for the data in blue (cold). 
+
+**Figure 2:** Relationship between duration of shift (hrs) and daily water intake (L)
+
+There is not a strong correlation between the duration of the shift worked that day (measured in hours) and daily water intake (measured in liters). Based on the orientation of the blue points, which represent individual, daily observations, there may be a positive relationship between these two variables, but a large amount of outliers make it difficult to discern a concrete relationship.
