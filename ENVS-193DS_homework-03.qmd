@@ -144,10 +144,29 @@ The residuals vs fitted and scale-location plots featured points that are somewh
 
 To evaluate the relationship between ocean temperature and giant kelp frond elongation rate, a simple linear regression was used to test whether temperature could predict kelp growth.
 
-A strong negative relationship was found between ocean temperature and giant kelp frond elongation rate, meaning kelp grew more slowly at higher temperatures (linear regression, F(1, 30) = 26.93, R² = 0.473, p < 0.001, $\alpha$ = 0.05). On average, kelp elongation rate decreased by about 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature.
+The results suggest to reject the null hypothesis because a strong negative relationship was found between ocean temperature and giant kelp frond elongation rate, meaning kelp grew more slowly at higher temperatures (linear regression, F(1, 30) = 26.93, R² = 0.473, p < 0.001, $\alpha$ = 0.05). On average, kelp elongation rate decreased by about 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature.
 
 ## e.
 
 These results suggest that warmer ocean temperature (°C) could reduce giant kelp frond elongation rate (cm day$^{-1}$). Because giant kelp forests provide crucial habitat and food resources for marine animals, a slower growth rate of these giant kelp fronds could result in resource availability for the dependent species. As the ongoing climate crisis worsens, ocean temperatures are projected to continue rising, which can further encourage the slowing of giant kelp frond elongation. Furthermore, it is crucial to continue investing time and funding into developing solutions to rising sea temperatures.
 
+## f.
 
+```{r}
+#| label: pearson-correlation-test
+
+# pearson correlation test to assess strength and direction of relationship
+cor.test(
+  # first variable: temperature from kelp data frame
+  kelp$temp_c,
+  # second variable: elongation rate from kelp data frame
+  kelp$kelp_elong,
+  # specification that it is a pearson correlation test
+  method = "pearson"
+)
+
+```
+
+The Pearson correlation test and the simple linear regression produced the same overall conclusion: to reject the null hypothesis in favor of accepting the alternative hypothesis, as both tests found a statistically significant negative relationship between ocean temperature and giant kelp frond elongation rate.
+
+The Pearson correlation measured the strength and direction of the relationship between temperature and kelp elongation rate (r = −0.688), while the linear regression estimated the amount of change in kelp growth associated with temperature (kelp elongation rate decreased by approximately 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature). 
