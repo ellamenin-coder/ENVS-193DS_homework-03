@@ -327,3 +327,6 @@ I do think that the authors clearly represented their statistics in figures. Bec
 
 This figure is mostly ink, as they data is represented by purposefully sized dots. Given how many relationships between trace metals this figure is exploring, I feel as though they have excellent aesthetic clarity with minimal visual clutter. This figure shows 72 (half the figure is filled because the other half would be repetitive) relationships, so I commend them on their creative figure creation to convey so much data in one figure. 
 
+## d.
+
+The only recommendation I would have for the authors is to add a title disclosing that the figure shows the correlation between the two types of trace metals found in the water. Although it is relatively clear that is the intended purpose of the figure in the caption, I think a title would serve this figure well because it is often the first component of a figure that a reader looks at is the title, and it lets them know what to expect while analyzing the figure. It is my understanding that a great figure is at least relatively clear to readers with just the title and figure itself.
