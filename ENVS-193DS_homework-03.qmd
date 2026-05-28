@@ -43,3 +43,101 @@ personal_data <- read.csv("data/personal data(Sheet1).csv")
 ## a.
 
 The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are a Pearson correlation and and a linear model. A Pearson correlation evaluates the strength and direction of the linear relationship between two variables; in this case, ocean temperature and giant kept frond elongation rate. A linear model also evaluates the relationship between two variables, but it specifically shows elongation rate as a response variable that is predicted by temperature. Creating a linear model for this data can show how much growth changes per 1 degree Celsius increase in temperature.
+
+## b.
+
+```{r}
+#| label: lm-model-and-predicted-values
+
+# creating new object called "kelp lm" out of linear model evaluating relationship between kept elongation rate and temperature in deg celsius
+kelp_lm <- lm(kelp_elong ~ temp_c, data = kelp) # kelp data frame
+
+# creating object kelp_preds by combining (cbind) the original kelp data set and predicted values and confidence intervals from the linear model above 
+kelp_preds <- cbind(
+  # original data set 
+  kelp,
+  # generating predicted values from linear model 
+  predict(kelp_lm, interval = "confidence") # interval = "confidence" calculates lower and upper confidence intervals and predicted regression line values
+)
+
+```
+
+
+```{r}
+#| label: creating-visualization
+
+# base layer ggplot with kelp_preds data frame
+ggplot(data = kelp_preds, 
+       # setting aesthetics 
+       mapping = aes(
+         # x is temperature measured in celsius
+         x = temp_c,
+         # y is giant kelp frond elongation rate measured in cm per day
+         y = kelp_elong)) +
+  # first layer geom_ribbon to visually show confidence intervals for linear model
+  geom_ribbon(aes
+              # setting the ribbon bounds to be the lower and upper confidence intervals
+              (ymin = lwr, ymax = upr),
+              # making our ribbon a nice light blue color
+              fill = "lightblue",
+              # making it so that you can see through our ribbon
+              alpha = 0.4) +
+  # second layer geom_line to show relationship line
+  geom_line(aes
+            # uses predicted values previously generated from lm as y-values for our line
+            (y = fit),
+            # color that compliments our ribbon
+            color = "steelblue",
+            # adjusting width of the line
+            linewidth = 1.2) +
+  # third layer geom_point to show individual observations in pretty green color
+  geom_point(color = "darkgreen",
+             # making points noticably large
+             size = 3) +
+  # using labs to set axis titles
+  labs(
+    # x axis: ocean temperature
+    x = "Ocean Temperature (°C)",
+    # y axis: giant kelp frond elongation rate
+    y = "Giant Kelp Frond Elongation Rate (cm day⁻¹)",
+    # visualization title: finding from visualization
+    title = "As ocean temperature decreases, so does elongation rate"
+  ) +
+  # setting a nice, basic theme
+  theme_minimal()
+
+```
+
+## c.
+
+### Running tests:
+
+```{r}
+
+# creating new object called "kelp lm" out of linear model evaluating relationship between kept elongation rate and temperature in deg celsius (done in previous part, but wanted to show again for this problem part)
+kelp_lm <- lm(kelp_elong ~ temp_c, data = kelp) # data frame kelp
+
+# display summary results of kelp linear model
+summary(kelp_lm)
+
+```
+
+**Note:** I decided that showing my code in which I ran my test is appropriate in this situation because this same code is used in the next part to check my assumptions.
+
+### Checking assumptions:
+
+```{r}
+#| label: checking-assumptions
+
+# creating diagnostic plots to check model assumptions
+par(mfrow = c(2, 2))
+# plot assumption plots: residuals vs fitted, q-q residuals, scale-location, and residuals vs leverage
+plot(kelp_lm)
+
+```
+
+Here, I checked the assumptions of the linearity of data, the normality of residuals, homoscedasticity (constant variance), and if there are outliers significant enough to influence our plot.
+
+The residuals vs fitted and scale-location plots featured points that are somewhat evenly and randomly distributed around the horizontal dotted line, indicating homoscedasticity. The Q-Q residuals plot suggests normally enough distributed residuals. Finally, the residuals vs leverage plot does not reveal any outliers significant enough to heavily influence the model, as all points fall within the indicator lines (indicator lines are not able to be seen, suggesting that points fall within them). All of these factors indicate that a linear model is appropriate for this data. 
+
+
