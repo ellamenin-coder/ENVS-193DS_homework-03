@@ -283,6 +283,12 @@ For my affective visualization, I want to utilize the fact that I am recording a
 
 ## c.
 
+```{r}
+#| label: rough-draft
+
+# code to include screenshot of affective visualization rough draft
+knitr::include_graphics("stats_affective_visualization.png")
+```
 
 
 ## d.
@@ -313,3 +319,6 @@ this scenario, the response variable could be one water quality parameter (like 
 knitr::include_graphics("data/spearman_screenshot copy.png")
 ```
 
+## b.
+
+I do think that the authors clearly represented their statistics in figures. Because they had so many trace metals (and relationships between these trace metals) to analyze, I believe this figure is an efficient way to visually demonstrate the correlation between two trace metals. This figure does not show explicit values per circle (Spearman correlation values), but the relative size of the circle compared to other sizes makes it easy to tell whether or not the presence of two trace metals are heavily related. The addition of the scale on the side also makes it very clear.
