@@ -4,20 +4,16 @@ author: "Ella Menin"
 date: "2026-05-28"
 format:
   pdf:
-    include-in-header:
-      text: |
-        \usepackage{fvextra}
-        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
-        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
-editor: source
+    toc: true # use this to display a table of contents
+execute:
+  message: false # use this to make sure messages don't show up
+  warning: false # use this to make sure warnings don't show up
 ---
 
 # Setting up
 
 ```{r}
 #| label: reading-in-packages
-#| message: false
-#| warning: false
 
 # reading in package: tidyverse
 library(tidyverse)
@@ -183,6 +179,8 @@ The Pearson correlation measured the strength and direction of the relationship 
 
 ## a.
 
+**Figure 1:**
+
 ```{r}
 #| label: cleaning-data-figure-1
 
@@ -228,6 +226,8 @@ ggplot(data = my_data_clean,
         # removing grid panels
         panel.grid = element_blank())
 ```
+
+**Figure 2:**
 
 ```{r}
 #| label: cleaning-data-figure-2
@@ -287,24 +287,28 @@ For my affective visualization, I want to utilize the fact that I am recording a
 
 ## b.
 
+Paper sketch: 
+
 ```{r}
 #| label: paper-sketch
 
 # code to include screenshot of affective visualization paper sketch
-knitr::include_graphics("stats_paper_drawing.png")
+knitr::include_graphics("drawings_and_rough_visualizations/stats_paper_drawing.png")
 
 ```
 
+**Note:** Sorry my lighting is not the best! 
 
 ## c.
+
+Rough draft: 
 
 ```{r}
 #| label: rough-draft
 
 # code to include screenshot of affective visualization rough draft
-knitr::include_graphics("stats_visualization.png")
+knitr::include_graphics("drawings_and_rough_visualizations/stats_visualization.png")
 ```
-
 
 ## d.
 
