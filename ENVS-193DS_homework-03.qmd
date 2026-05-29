@@ -1,7 +1,15 @@
 ---
 title: "ENVS 193DS Homework #3"
 author: "Ella Menin"
-format: pdf
+date: "2026-05-28"
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
+editor: source
 ---
 
 # Setting up
@@ -279,6 +287,13 @@ For my affective visualization, I want to utilize the fact that I am recording a
 
 ## b.
 
+```{r}
+#| label: paper-sketch
+
+# code to include screenshot of affective visualization paper sketch
+knitr::include_graphics("stats_paper_drawing.png")
+
+```
 
 
 ## c.
@@ -287,7 +302,7 @@ For my affective visualization, I want to utilize the fact that I am recording a
 #| label: rough-draft
 
 # code to include screenshot of affective visualization rough draft
-knitr::include_graphics("stats_affective_visualization.png")
+knitr::include_graphics("stats_visualization.png")
 ```
 
 
