@@ -5,9 +5,12 @@ date: "2026-05-28"
 format:
   pdf:
     toc: true # use this to display a table of contents
-execute:
-  message: false # use this to make sure messages don't show up
-  warning: false # use this to make sure warnings don't show up
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
+editor: source
 ---
 
 # Setting up
@@ -44,11 +47,11 @@ personal_data <- read.csv("data/personal data(Sheet1).csv")
 
 # Problem 1: Giant kelp fronds
 
-## a.
+## a. Appropriate tests
 
 The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are a Pearson correlation and and a simple linear regression. A Pearson correlation evaluates the strength and direction of the linear relationship between two variables; in this case, ocean temperature and giant kept frond elongation rate. A simple linear regression also evaluates the relationship between two variables, but it specifically shows elongation rate as a response variable that is predicted by temperature. Creating a linear model for this data can show how much growth changes per 1 degree Celsius increase in temperature.
 
-## b.
+## b. Creating a visualization 
 
 ```{r}
 #| label: lm-model-and-predicted-values
@@ -112,7 +115,7 @@ ggplot(data = kelp_preds,
 
 ```
 
-## c.
+## c. Checking assumptions and running a test
 
 ### Running tests:
 
@@ -144,17 +147,17 @@ Here, I checked the assumptions of the linearity of data, the normality of resid
 
 The residuals vs fitted and scale-location plots featured points that are somewhat evenly and randomly distributed around the horizontal dotted line, indicating homoscedasticity. The Q-Q residuals plot suggests normally enough distributed residuals. Finally, the residuals vs leverage plot does not reveal any outliers significant enough to heavily influence the model, as all points fall within the indicator lines (indicator lines are not able to be seen, suggesting that points fall within them). All of these factors indicate that a linear model is appropriate for this data. 
 
-## d.
+## d. Communicating results
 
 To evaluate the relationship between ocean temperature and giant kelp frond elongation rate, a simple linear regression was used to test whether temperature could predict kelp growth.
 
 The results suggest to reject the null hypothesis because a strong negative relationship was found between ocean temperature and giant kelp frond elongation rate, meaning kelp grew more slowly at higher temperatures (linear regression, F(1, 30) = 26.93, R² = 0.473, p < 0.001, $\alpha$ = 0.05). On average, kelp elongation rate decreased by about 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature.
 
-## e.
+## e. Test implications
 
 These results suggest that warmer ocean temperature (°C) could reduce giant kelp frond elongation rate (cm day$^{-1}$). Because giant kelp forests provide crucial habitat and food resources for marine animals, a slower growth rate of these giant kelp fronds could result in resource availability for the dependent species. As the ongoing climate crisis worsens, ocean temperatures are projected to continue rising, which can further encourage the slowing of giant kelp frond elongation. Furthermore, it is crucial to continue investing time and funding into developing solutions to rising sea temperatures.
 
-## f.
+## f. Double checking using a different test
 
 ```{r}
 #| label: pearson-correlation-test
@@ -177,7 +180,7 @@ The Pearson correlation measured the strength and direction of the relationship 
 
 # Problem 2: Personal data
 
-## a.
+## a. Updating my visualizations
 
 **Figure 1:**
 
@@ -269,7 +272,7 @@ ggplot(data = my_data_steps,
 
 ```
 
-## b.
+## b. Creating captions for figures
 
 **Figure 1:** Relationship between daily water intake (L) and daily temperature (hot, warm, cold)
 
@@ -281,11 +284,11 @@ There is not a strong correlation between the duration of the shift worked that 
 
 # Problem 3: Affective visualization
 
-## a.
+## a. Describing my affective visualization
 
 For my affective visualization, I want to utilize the fact that I am recording a ton of variables every day, including whether or not I went to school, work, if I had a sinus infection, and much more. Consequently, for my affective visualization, I would like to use my water consumption for a day to tell a story about my entire day, like a "day-in-my-life" premise. I want it to have character and reflect my personal artistic style because it is *about me.* I am thinking of drawing my Owala water bottle as the main component and visually show my water consumption, then surround this with different variable explanations about what I did that day that could have contributed to my water consumption.
 
-## b.
+## b. Creating a sketch on paper of my idea
 
 Paper sketch: 
 
@@ -297,9 +300,9 @@ knitr::include_graphics("drawings_and_rough_visualizations/stats_paper_drawing.p
 
 ```
 
-**Note:** Sorry my lighting is not the best! 
+**Note:** Sorry, my lighting is not the best! 
 
-## c.
+## c. Making a draft of my visualization
 
 Rough draft: 
 
@@ -310,7 +313,7 @@ Rough draft:
 knitr::include_graphics("drawings_and_rough_visualizations/stats_visualization.png")
 ```
 
-## d.
+## d. Beginning to form an artist statement
 
 * For this piece, I am showing my daily water intake (L), and what conditions I experienced that day that may influence it. 
 
@@ -320,13 +323,13 @@ knitr::include_graphics("drawings_and_rough_visualizations/stats_visualization.p
 
 * I created my work by first thinking about what I wanted to accomplish, which was telling a story about my day and mood through my work. So, I started with a time-line to outline my day and what my thoughts were about water. I added my variables as well, and then included lots of little icons that I associate with those variables.
 
-## e.
+## e. Hyperlink to slideshow for 5/29 workshop
 
 [Click here](https://docs.google.com/presentation/d/1zhQwAGbYkwbz2qa-X33W2PWXj3Q-ATORd7sfZFf4XUw/edit?usp=sharing) to view slideshow presentation 
 
 # Problem 4: Statistical critique
 
-## a.
+## a. Revisiting and summarizing
 
 For my statistical critique, I am examining a paper entitled, “Behavioural dynamics of water quality parameters and human exposure assessment of trace metals in Agulu Lake Water, South-East Nigeria” from the ScienceDirect journal. In this paper, they include a Spearman correlation, as they are focusing on examining relationships between pairs of variables. In
 this scenario, the response variable could be one water quality parameter (like concentration of a specific trace metal) and the predictor variable could be another water quality parameter (like another trace metal).
@@ -338,14 +341,14 @@ this scenario, the response variable could be one water quality parameter (like 
 knitr::include_graphics("data/spearman_screenshot copy.png")
 ```
 
-## b.
+## b. Assessing visual clarity
 
 I do think that the authors clearly represented their statistics in figures. Because they had so many trace metals (and relationships between these trace metals) to analyze, I believe this figure is an efficient way to visually demonstrate the correlation between two trace metals. This figure does not show explicit values per circle (Spearman correlation values), but the relative size of the circle compared to other sizes makes it easy to tell whether or not the presence of two trace metals are heavily related. The addition of the scale on the side also makes it very clear.
 
-## c.
+## c. Assessing aesthetic clarity
 
 This figure is mostly ink, as they data is represented by purposefully sized dots. Given how many relationships between trace metals this figure is exploring, I feel as though they have excellent aesthetic clarity with minimal visual clutter. This figure shows 72 (half the figure is filled because the other half would be repetitive) relationships, so I commend them on their creative figure creation to convey so much data in one figure. 
 
-## d.
+## d. Recommendations
 
 The only recommendation I would have for the authors is to add a title disclosing that the figure shows the correlation between the two types of trace metals found in the water. Although it is relatively clear that is the intended purpose of the figure in the caption, I think a title would serve this figure well because it is often the first component of a figure that a reader looks at is the title, and it lets them know what to expect while analyzing the figure. It is my understanding that a great figure is at least relatively clear to readers with just the title and figure itself.
