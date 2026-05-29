@@ -26,6 +26,9 @@ This is a 'data' folder in which data files are stored.
 
 There is a 'code' folder in which data for all linear models are stored.
 
+There is a 'drawings_and_rough_visualizations' in which my sketches and rough
+drafts are stored.
+
 ## Rendered output
 
 The rendered pdf for all of this work can be found here:
