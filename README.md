@@ -32,4 +32,4 @@ drafts are stored.
 ## Rendered output
 
 The rendered pdf for all of this work can be found here:
-[click here]()
+[click here](https://github.com/ellamenin-coder/ENVS-193DS_homework-03/blob/main/ENVS-193DS_homework-03.pdf)
