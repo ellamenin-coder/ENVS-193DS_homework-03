@@ -17,6 +17,8 @@ editor: source
 
 ```{r}
 #| label: reading-in-packages
+#| message: false
+#| warning: false
 
 # reading in package: tidyverse
 library(tidyverse)
@@ -33,7 +35,7 @@ library(readxl)
 #| label: reading-in-kelp-data
 
 # storing read kelp data as "kelp" object
-kelp <- read.csv("data/temp-kelp.csv")
+kelp <- read.csv(here("data", "temp-kelp.csv"))
 
 ```
 
@@ -41,7 +43,7 @@ kelp <- read.csv("data/temp-kelp.csv")
 #| label: reading-in-personal-data
 
 # storing read personal data as "personal_data" object
-personal_data <- read.csv("data/personal data(Sheet1).csv")
+personal_data <- read.csv(here("data", "personal data(Sheet1).csv"))
 
 ```
 
@@ -296,7 +298,7 @@ Paper sketch:
 #| label: paper-sketch
 
 # code to include screenshot of affective visualization paper sketch
-knitr::include_graphics("drawings_and_rough_visualizations/stats_paper_drawing.png")
+knitr::include_graphics(here("drawings_and_rough_visualizations", "stats_paper_drawing.png"))
 
 ```
 
@@ -310,7 +312,7 @@ Rough draft:
 #| label: rough-draft
 
 # code to include screenshot of affective visualization rough draft
-knitr::include_graphics("drawings_and_rough_visualizations/stats_visualization.png")
+knitr::include_graphics(here("drawings_and_rough_visualizations", "stats_visualization.png"))
 ```
 
 ## d. Beginning to form an artist statement
