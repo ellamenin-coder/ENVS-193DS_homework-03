@@ -1,0 +1,15 @@
+---
+title: "ENVS 193DS Homework #3"
+author: "Ella Menin"
+format: pdf
+---
+
+# Setting up
+
+```{r}
+
+
+
+
+```
+
