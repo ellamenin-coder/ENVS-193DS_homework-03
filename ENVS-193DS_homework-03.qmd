@@ -51,7 +51,7 @@ personal_data <- read.csv(here("data", "personal data(Sheet1).csv"))
 
 ## a. Appropriate tests
 
-The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are a Pearson correlation and and a simple linear regression. A Pearson correlation evaluates the strength and direction of the linear relationship between two variables; in this case, ocean temperature and giant kept frond elongation rate. A simple linear regression also evaluates the relationship between two variables, but it specifically shows elongation rate as a response variable that is predicted by temperature. Creating a linear model for this data can show how much growth changes per 1 degree Celsius increase in temperature.
+The appropriate tests to determine the strength of the relationship between ocean temperature and giant kelp frond elongation rate are a Pearson correlation and a Spearman rank correlation. Pearson correlation measures the strength and direction of a linear relationship between two variables (in this case, temperature and giant kelp frond elongation rate), while Spearman correlation measures the strength and direction of a relationship using ranked data rather than actual raw data values. A Spearman rank correlation is appropriate when assumptions of linearity or normality are not met.
 
 ## b. Creating a visualization 
 
