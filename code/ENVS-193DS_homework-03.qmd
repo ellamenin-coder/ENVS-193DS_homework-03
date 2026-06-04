@@ -1,15 +1,402 @@
 ---
 title: "ENVS 193DS Homework #3"
 author: "Ella Menin"
-format: pdf
+date: "2026-05-28"
+format:
+  pdf:
+    toc: true # use this to display a table of contents
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
+editor: source
 ---
 
 # Setting up
 
 ```{r}
+#| label: reading-in-packages
+#| message: false
+#| warning: false
 
-
-
+# reading in package: tidyverse
+library(tidyverse)
+# reading in package: here
+library(here)
+# reading in package: janitor
+library(janitor)
+# reading in package: readxl
+library(readxl)
 
 ```
 
+```{r}
+#| label: reading-in-kelp-data
+
+# storing read kelp data as "kelp" object
+kelp <- read.csv(here("data", "temp-kelp.csv"))
+
+```
+
+```{r}
+#| label: reading-in-personal-data
+
+# storing read personal data as "personal_data" object
+personal_data <- read.csv(here("data", "personal data(Sheet1).csv"))
+
+```
+
+# Problem 1: Giant kelp fronds
+
+## a. Appropriate tests
+
+The appropriate tests to determine the strength of the relationship between ocean temperature and giant kelp frond elongation rate are a Pearson correlation and a Spearman rank correlation. Pearson correlation measures the strength and direction of a linear relationship between two variables (in this case, temperature and giant kelp frond elongation rate), while Spearman correlation measures the strength and direction of a monotonic relationship using ranked data rather than actual raw data values. A Spearman rank correlation is appropriate when assumptions of linearity or normality are not met.
+
+## b. Creating a visualization 
+
+```{r}
+#| label: creating-visualization
+
+# base layer ggplot with kelp_preds data frame
+ggplot(data = kelp, 
+       # setting aesthetics 
+       mapping = aes(
+         # x is temperature measured in celsius
+         x = temp_c,
+         # y is giant kelp frond elongation rate measured in cm per day
+         y = kelp_elong)) +
+  # first layer geom point showing individual data points
+  geom_point(color = "darkgreen",
+             # making points noticeably large
+             size = 3) +
+  # using labs to set axis titles
+  labs(
+    # x axis: ocean temperature
+    x = "Ocean Temperature (°C)",
+    # y axis: giant kelp frond elongation rate
+    y = expression("Giant Kelp Frond Elongation Rate (" * cm ~ day^{-1} * ")"),
+    # visualization title: finding from visualization
+    title = "As ocean temperature increases, \nelongation rate decreases"
+  ) +
+  # setting a nice, basic theme
+  theme_minimal()
+
+```
+
+## c. Checking assumptions and running a test
+
+### Checking assumptions:
+
+To check the assumptions for a Spearman rank correlation, we must test linearity and the normality of the two variables: temperature and giant kelp fond elongation rate.
+
+To test for linearity, we are going to utilize the previously made correlation visualization (shown again for viewer convenience). 
+
+```{r}
+#| label: visualization-again
+#| message: false
+#| warning: false
+
+# using previously made visualization to check for linearity 
+
+# base layer ggplot with kelp_preds data frame
+ggplot(data = kelp, 
+       # setting aesthetics 
+       mapping = aes(
+         # x is temperature measured in celsius
+         x = temp_c,
+         # y is giant kelp frond elongation rate measured in cm per day
+         y = kelp_elong)) +
+  # first layer geom point showing individual data points
+  geom_point(color = "darkgreen",
+             # making points noticeably large
+             size = 3) +
+  # using labs to set axis titles
+  labs(
+    # x axis: ocean temperature
+    x = "Ocean Temperature (°C)",
+    # y axis: giant kelp frond elongation rate
+    y = expression("Giant Kelp Frond Elongation Rate (" * cm ~ day^{-1} * ")"),
+    # visualization title: finding from visualization
+    title = "As ocean temperature increases, \nelongation rate decreases"
+  ) +
+  # setting a nice, basic theme
+  theme_minimal()
+
+```
+
+Based on the orientation of the points, temperature and giant kelp frond elongation rate have a negative linear relationship. 
+
+In order to test the normality of both variables, it is necessary to construct a QQ plot for each one.
+
+QQ plot for temperature data normality:
+
+```{r}
+#| label: qq-temperature
+
+# base layer ggplot with kelp data frame
+ggplot(data = kelp,
+       # sample temp_c variable because we are testing normality of temperature
+       mapping = aes(sample = temp_c)) +
+  # first layer individual data points in pretty turquoise color
+  geom_qq(col = "turquoise") +
+  # second layer is normality line in light green
+  geom_qq_line(col = "lightgreen") +
+  # relabeling axes
+  labs(x = "Theoretical Quantiles", # x axis theoretical quantiles
+       y = "Sample Quantiles", # y axis sample quantiles
+       title = "Temperature (\u00B0C) normality") + #title is temperature normality
+  # nice, minimal theme for aesthetics
+  theme_minimal()
+
+```
+
+QQ plot for kelp elongation data normality:
+
+```{r}
+#| label: qq-kelp-elongation
+
+# base layer ggplot with kelp data frame
+ggplot(data = kelp,
+       # sample is kelp elongation values because we are checking normality of kelp elongation
+       mapping = aes(sample = kelp_elong)) +
+  # first layer geom_qq shows individual data points in chartreuse
+  geom_qq(col = "chartreuse2") +
+  # second layer geom qq line shows normality line in dark green
+  geom_qq_line(col = "darkgreen") +
+  # labeling axes and title
+  labs(x = "Theoretical Quantiles", # axis is theoretical quantiles
+       y = "Sample Quantiles", # y is sample quantiles
+       title = "Kelp elongation (cm/day) normality") + # title conveys that we are testing kelp elongation normality
+  # nice, simple theme for aesthetics
+  theme_minimal()
+
+```
+
+Based on the QQ plots above, the sample data points roughly align with the the reference line, so we can determine that both variables are normally distributed enough.
+
+### Running tests::
+
+```{r}
+
+# creating new object spearman_test from spearman rank test results
+spearman_test <- cor.test(
+  # first variable ocean temperature
+  kelp$temp_c,
+  # second variable giant kelp frond elongation rate
+  kelp$kelp_elong,
+  # running a spearman rank test to show correlation
+  method = "spearman"
+)
+
+# display results
+spearman_test
+
+```
+
+
+## d. Communicating results
+
+
+
+
+
+## e. Test implications
+
+These results suggest that warmer ocean temperature (°C) could reduce giant kelp frond elongation rate (cm day$^{-1}$). Because giant kelp forests provide crucial habitat and food resources for marine animals, a slower growth rate of these giant kelp fronds could result in resource availability for the dependent species. As the ongoing climate crisis worsens, ocean temperatures are projected to continue rising, which can further encourage the slowing of giant kelp frond elongation. Furthermore, it is crucial to continue investing time and funding into developing solutions to rising sea temperatures.
+
+## f. Double checking using a different test
+
+```{r}
+#| label: pearson-correlation-test
+
+# pearson correlation test to assess strength and direction of relationship
+cor.test(
+  # first variable: temperature from kelp data frame
+  kelp$temp_c,
+  # second variable: elongation rate from kelp data frame
+  kelp$kelp_elong,
+  # specification that it is a pearson correlation test
+  method = "pearson"
+)
+
+```
+
+The Pearson correlation test and the simple linear regression produced the same overall conclusion: to reject the null hypothesis in favor of accepting the alternative hypothesis, as both tests found a statistically significant negative relationship between ocean temperature and giant kelp frond elongation rate.
+
+The Pearson correlation measured the strength and direction of the relationship between temperature and kelp elongation rate (r = −0.688), while the linear regression estimated the amount of change in kelp growth associated with temperature (kelp elongation rate decreased by approximately 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature). 
+
+# Problem 2: Personal data
+
+## a. Updating my visualizations
+
+**Figure 1:**
+
+```{r}
+#| label: cleaning-data-figure-1
+
+# creating a new object specifically for my cleaned data
+my_data_clean <- personal_data |>
+# cleaning up the names to include lowercase letters and underscores
+janitor::clean_names() |>
+filter(!is.na(temperature_h_w_c),
+         temperature_h_w_c != "") |>
+mutate(temperature_h_w_c = factor(temperature_h_w_c,
+                                  levels = c("H", "W", "C"), # order in which levels will appear on plot 
+                                  labels = c("Hot", "Warm", "Cold"))) # full words for plot labels
+```
+
+```{r}
+#| label: coding-figure-1
+
+# base layer ggplot with my_data_clean data frame
+ggplot(data = my_data_clean,
+       # setting x and y axes
+       mapping = aes(x = temperature_h_w_c, # x axis temperature
+                     y = water_intake_l, # y axis water intake in liters
+                     color = temperature_h_w_c)) + # color by temperature
+  # first layer geom_boxplot to assess median amounts of water drank
+  geom_boxplot() +
+  # setting nice colors for my temperature values (intuitive ones)
+  scale_color_manual(values = c("Cold" = "skyblue", # blue for cold
+                                "Warm" = "palevioletred", # this color is just warm to me idk
+                                "Hot" = "red3")) + # red for hot, duh
+  # renaming axes to be neater and more clear
+  labs(
+    x = "Temperature: hot, warm, or cold", # x axis looking at temperature
+    y = "Water intake (L)", # y axis looking at water intake
+    # title that says something about the figure
+    title = "On average, I drink more water when it is hot outside",
+    # subtitle stating when the most recent data collection was
+    subtitle = "Most recent data collected 5/25/2026"
+  ) +
+  # my favorite theme
+  theme_bw() +
+  # removing the legend, not super necessary here
+  theme(legend.position = "none",
+        # removing grid panels
+        panel.grid = element_blank())
+```
+
+**Figure 2:**
+
+```{r}
+#| label: cleaning-data-figure-2
+
+# making new object specifically for this part, as i do not want to mess with my other cleaned data object in case i want to re-run
+my_data_steps <- personal_data |> 
+  # cleaning names to be lowercase and include underscores
+  janitor::clean_names() |> 
+  # dropping n/a values for duration of shift to filter for only days i worked
+  drop_na(duration_of_shift_hrs)
+
+```
+
+```{r}
+#| label: coding-figure-2
+
+# base layer ggplot with my_data_steps data frame
+ggplot(data = my_data_steps,
+       # setting x and y axes
+       mapping = aes(x = duration_of_shift_hrs, # x axis is duration of shift
+                     y = water_intake_l)) + # y axis is water intake
+  # first layer geom_point in pretty royal blue color
+  geom_point(color = "royalblue2") +
+  # setting axes, title, and subtitles
+  labs(
+    # x axis title duration of shift
+    x = "Duration of shift (hours)",
+    # y axis title water intake
+    y = "Water intake (L) for entire day",
+    # bland statement for title because this relationship is kind of a stretch
+    title = "Loose relationship between duration \nof shift and daily water intake",
+    # subtitle most recent data collected on may 25
+    subtitle = "Most recent data collected 5/25/2026"
+  ) +
+  # voted best theme on a reddit post i read
+  theme_bw() +
+  # getting rid of panel grid
+  theme(panel.grid = element_blank())
+
+```
+
+## b. Creating captions for figures
+
+**Figure 1:** Relationship between daily water intake (L) and daily temperature (hot, warm, cold)
+
+On average, my median daily water intake (measured in liters) is higher when I experience warmer temperatures that day, as shown by the median bar for the data in red (hot) being higher than the median bar for the data in pink (warm) and the median bar for the data in blue (cold). 
+
+**Figure 2:** Relationship between duration of shift (hrs) and daily water intake (L)
+
+There is not a strong correlation between the duration of the shift worked that day (measured in hours) and daily water intake (measured in liters). Based on the orientation of the blue points, which represent individual, daily observations, there may be a positive relationship between these two variables, but a large amount of outliers make it difficult to discern a concrete relationship.
+
+# Problem 3: Affective visualization
+
+## a. Describing my affective visualization
+
+For my affective visualization, I want to utilize the fact that I am recording a ton of variables every day, including whether or not I went to school, work, if I had a sinus infection, and much more. Consequently, for my affective visualization, I would like to use my water consumption for a day to tell a story about my entire day, like a "day-in-my-life" premise. I want it to have character and reflect my personal artistic style because it is *about me.* I am thinking of drawing my Owala water bottle as the main component and visually show my water consumption, then surround this with different variable explanations about what I did that day that could have contributed to my water consumption.
+
+## b. Creating a sketch on paper of my idea
+
+Paper sketch: 
+
+```{r}
+#| label: paper-sketch
+
+# code to include screenshot of affective visualization paper sketch
+knitr::include_graphics(here("drawings_and_rough_visualizations", "stats_paper_drawing.png"))
+
+```
+
+**Note:** Sorry, my lighting is not the best! 
+
+## c. Making a draft of my visualization
+
+Rough draft: 
+
+```{r}
+#| label: rough-draft
+
+# code to include screenshot of affective visualization rough draft
+knitr::include_graphics(here("drawings_and_rough_visualizations", "stats_visualization.png"))
+```
+
+## d. Beginning to form an artist statement
+
+* For this piece, I am showing my daily water intake (L), and what conditions I experienced that day that may influence it. 
+
+* After looking over the resources provided to us, I really enjoyed the character in Stefanie Posavec and Giorgia Lupi’s Dear Data project. I feel as though, in this project, they showed a lot of character, which inspired me to include many personal aspects in my work, such as my thoughts throughout the day, funny little remarks, and other small components.
+
+* I decided to do a digital drawing because I felt as though hand-drawing my icons the way that I experience and "feel" my variables would be the most authentic. For example, my hand-drawn sad "sinus infection" face is exactly how I feel when I have a sinus infection.
+
+* I created my work by first thinking about what I wanted to accomplish, which was telling a story about my day and mood through my work. So, I started with a time-line to outline my day and what my thoughts were about water. I added my variables as well, and then included lots of little icons that I associate with those variables.
+
+## e. Hyperlink to slideshow for 5/29 workshop
+
+[Click here](https://docs.google.com/presentation/d/1zhQwAGbYkwbz2qa-X33W2PWXj3Q-ATORd7sfZFf4XUw/edit?usp=sharing) to view slideshow presentation 
+
+# Problem 4: Statistical critique
+
+## a. Revisiting and summarizing
+
+For my statistical critique, I am examining a paper entitled, “Behavioural dynamics of water quality parameters and human exposure assessment of trace metals in Agulu Lake Water, South-East Nigeria” from the ScienceDirect journal. In this paper, they include a Spearman correlation, as they are focusing on examining relationships between pairs of variables. In
+this scenario, the response variable could be one water quality parameter (like concentration of a specific trace metal) and the predictor variable could be another water quality parameter (like another trace metal).
+
+```{r}
+#| label: inserting-spearman-correlation-figure
+
+# code to include png of the spearman correlation figure from paper
+knitr::include_graphics("data/spearman_screenshot copy.png")
+```
+
+## b. Assessing visual clarity
+
+I do think that the authors clearly represented their statistics in figures. Because they had so many trace metals (and relationships between these trace metals) to analyze, I believe this figure is an efficient way to visually demonstrate the correlation between two trace metals. This figure does not show explicit values per circle (Spearman correlation values), but the relative size of the circle compared to other sizes makes it easy to tell whether or not the presence of two trace metals are heavily related. The addition of the scale on the side also makes it very clear.
+
+## c. Assessing aesthetic clarity
+
+This figure is mostly ink, as they data is represented by purposefully sized dots. Given how many relationships between trace metals this figure is exploring, I feel as though they have excellent aesthetic clarity with minimal visual clutter. This figure shows 72 (half the figure is filled because the other half would be repetitive) relationships, so I commend them on their creative figure creation to convey so much data in one figure. 
+
+## d. Recommendations
+
+The only recommendation I would have for the authors is to add a title disclosing that the figure shows the correlation between the two types of trace metals found in the water. Although it is relatively clear that is the intended purpose of the figure in the caption, I think a title would serve this figure well because it is often the first component of a figure that a reader looks at is the title, and it lets them know what to expect while analyzing the figure. It is my understanding that a great figure is at least relatively clear to readers with just the title and figure itself.
