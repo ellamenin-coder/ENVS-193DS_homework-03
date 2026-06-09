@@ -197,7 +197,7 @@ spearman_test
 
 ## d. Communicating results
 
-
+There is a moderate negative relationship between ocean temperature and giant kelp frond elongation rate.  
 
 
 
