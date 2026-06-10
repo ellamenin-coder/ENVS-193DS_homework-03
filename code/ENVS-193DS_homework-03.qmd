@@ -175,9 +175,11 @@ ggplot(data = kelp,
 
 Based on the QQ plots above, the sample data points roughly align with the the reference line, so we can determine that both variables are normally distributed enough.
 
-### Running tests::
+### Running tests:
 
 ```{r}
+#| message: false
+#| warning: false
 
 # creating new object spearman_test from spearman rank test results
 spearman_test <- cor.test(
@@ -386,7 +388,7 @@ this scenario, the response variable could be one water quality parameter (like 
 #| label: inserting-spearman-correlation-figure
 
 # code to include png of the spearman correlation figure from paper
-knitr::include_graphics("data/spearman_screenshot copy.png")
+knitr::include_graphics(here("data", "spearman_screenshot copy.png"))
 ```
 
 ## b. Assessing visual clarity
