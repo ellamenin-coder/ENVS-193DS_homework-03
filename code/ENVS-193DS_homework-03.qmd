@@ -51,7 +51,7 @@ personal_data <- read.csv(here("data", "personal data(Sheet1).csv"))
 
 ## a. Appropriate tests
 
-The appropriate tests to determine the strength of the relationship between ocean temperature and giant kelp frond elongation rate are a Pearson correlation and a Spearman rank correlation. Pearson correlation measures the strength and direction of a linear relationship between two variables (in this case, temperature and giant kelp frond elongation rate), while Spearman correlation measures the strength and direction of a monotonic relationship using ranked data rather than actual raw data values. A Spearman rank correlation is appropriate when assumptions of linearity or normality are not met.
+The appropriate tests to determine the strength of the relationship between ocean temperature and giant kelp frond elongation rate are a Pearson correlation and a Spearman rank correlation. Pearson correlation measures the strength and direction of a linear relationship between two variables (in this case, temperature and giant kelp frond elongation rate), while Spearman correlation measures the strength and direction of a relationship using ranked data rather than actual raw data values. A Spearman rank correlation is appropriate when assumptions of linearity or normality are not met.
 
 ## b. Creating a visualization 
 
@@ -197,9 +197,9 @@ spearman_test
 
 ## d. Communicating results
 
-There is a moderate negative relationship between ocean temperature and giant kelp frond elongation rate.  
+To evaluate the strength of the relationship between temperature and giant kelp frond elongation rate, I used a Spearman rank correlation test because it can be used to measure the strength and direction of the correlation between two variables. After running this test, it has been concluded there is a moderate negative relationship between ocean temperature and giant kelp frond elongation rate. (Spearman rank correlation. test, $\rho$ = 0.68, S = 9216.1, p < 0.001, $\alpha$ = 0.05). 
 
-
+Furthermore, according to our statistical test, ocean temperature does have an effect on giant kelp frond elongation rate, potentially because giant kelp may biologically thrive in particular ocean temperatures and conditions. This test suggests that they grow faster in colder temperatures. 
 
 ## e. Test implications
 
