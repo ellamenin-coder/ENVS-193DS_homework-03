@@ -222,9 +222,9 @@ cor.test(
 
 ```
 
-The Pearson correlation test and the simple linear regression produced the same overall conclusion: to reject the null hypothesis in favor of accepting the alternative hypothesis, as both tests found a statistically significant negative relationship between ocean temperature and giant kelp frond elongation rate.
+The Pearson correlation test and the Spearman rank correlation test produced the same overall conclusion: to reject the null hypothesis in favor of accepting the alternative hypothesis, as both tests found a statistically significant negative relationship between ocean temperature and giant kelp frond elongation rate.
 
-The Pearson correlation measured the strength and direction of the relationship between temperature and kelp elongation rate (r = −0.688), while the linear regression estimated the amount of change in kelp growth associated with temperature (kelp elongation rate decreased by approximately 0.43 cm day$^{-1}$ for every 1°C increase in ocean temperature). 
+The Pearson correlation measured the strength and direction of the relationship between temperature and kelp elongation rate (r = −0.68), and so did the Spearman test, yielding an almost exactly the same correlation coefficent ($\rho$ = -0.69). 
 
 # Problem 2: Personal data
 
